@@ -2,8 +2,11 @@
 #from https://gist.github.com/vinothpandian/4337527
 
 import random
-import pygame
+import threading
 import sys
+import pygame
+
+
 from pygame.locals import *
 
 pygame.init()
@@ -150,21 +153,20 @@ def keyup(event):
 
 init()
 
-
 #game loop
-while True:
-
-    draw(window)
-
-    for event in pygame.event.get():
-
-        if event.type == KEYDOWN:
-            keydown(event)
-        elif event.type == KEYUP:
-            keyup(event)
-        elif event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+def game_loop():
+    while True:
+        draw(window)
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                keydown(event)
+            elif event.type == KEYUP:
+                keyup(event)
+            elif event.type == QUIT:
+                pygame.quit()
+                sys.exit()
             
-    pygame.display.update()
-    fps.tick(60)
+        pygame.display.update()
+        fps.tick(60)
+
+print("there")
